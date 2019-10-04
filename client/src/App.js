@@ -13,16 +13,16 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: {},
-      // followers: []
+      // users: {},
+      followers: []
     };
 
   }
 
   componentDidMount() {
-    axios.get("https://api.github.com/users/Jobsy").then(response => {
-      console.log("LLL: ", response);
-      this.setState({ users: response.data });
+    axios.get("http://localhost:5000/api/players").then(response => {
+      console.log("fff: ", response.data);
+      this.setState({ followers: response.data });
     });
   }
 
@@ -31,14 +31,14 @@ class App extends React.Component {
       <div className="app">
               {/* <Navbar /> */}
 
-        <div>
+        {/* <div>
           <Link exact to="/"><h1>GitHub User Card</h1></Link>
           <Route exact path="/" render={(props) => <Players {...props} usersProps={this.state.users} />} />
-        </div>
-
-        {/* <div>
-          <Route exact path="/followers" render={(props) => <Followers {...props} followersProps={this.state.followers} />} />
         </div> */}
+
+        <div>
+          <Route exact path="/followers" render={(props) => <Players {...props} followersProps={this.state.followers} />} />
+        </div>
       </div>
     );
   }

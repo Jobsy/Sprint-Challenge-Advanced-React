@@ -1,58 +1,51 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Card, Icon, Button, Header, Image, Modal } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
-class Users extends React.Component {
+class Players extends React.Component {
   constructor(props) {
     super(props);
+    this.colorArr = [
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+      "red", "orange", "yellow", "olive", "green", "teal", "blue", "violet", "purple", "pink", "brown", "grey", "black", "red",
+
+    ]
   }
 
   render() {
     return (
-      <div class="ui card">
-        <div class="ui slide masked reveal image">
-          <img
-            src={this.props.usersProps.avatar_url}
-            class="visible content"
-            alt=""
-          />
-          <div class="hidden content">
-            <h3>Other Info:</h3>
-            <ul>
-              <li>
-                <a href={this.props.usersProps.gist_url}>Gists</a>
-              </li>
-              <li>
-                <a href={this.props.usersProps.oganizations_url}>Oganizations</a>
-              </li>
-              <li>
-                <a href={this.props.usersProps.repos_url}>Repos</a>
-              </li>
-              <li>
-                <a href={this.props.usersProps.followers_url}>Followers</a>
-              </li>
-            </ul>
-            <span>Last Upadted Date: {this.props.usersProps.updated_at}</span>
-          </div>
-        </div>
-        <div class="content">
-          <a href={this.props.usersProps.html_url} class="header">
-            {this.props.usersProps.name}
-          </a>
-          <span class="meta date">{this.props.usersProps.login}</span>
-          <div class="meta right floated">
-            <span class="date">{this.props.usersProps.location}</span>
-          </div>
-        </div>
-        <div class="extra content">
-          <span>{this.props.usersProps.public_repos} Repos</span>
-          {/* <a class="right floated">
-            <i class="users" />
-            {this.props.usersProps.followers} followers
-          </a> */}
-          <Link exact to="/followers" class="right floated">
-            <i class="users" />
-            {this.props.usersProps.followers} followers
-          </Link>
+      <div>
+        <h1>Players</h1>
+        <div class="ui four cards">
+          {this.props.followersProps === [] ? null : this.props.followersProps.map((follower, index) => (
+            this.color = `${this.colorArr[index]} card`,
+            <a class={this.color}>
+              <div class="image">
+                <img src={follower.avatar_url} />
+                <p>{follower.name}</p>
+              </div>
+
+              <Modal trigger={<Button>Show Details</Button>}>
+                <Modal.Header>{follower.login}</Modal.Header>
+                <Modal.Content image>
+                  <Image wrapped size='medium' src={follower.avatar_url} />
+                  <Modal.Description>
+                    <Header>{follower.name} Default Profile</Header>
+                    <p>
+                      Follow this <a href={follower.html_url}>link</a> to checkout {follower.country} main page
+    </p>
+                    <p>Or click this <a href={follower.searches}>link</a> to view current organisation</p>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+            </a>
+          ))}
         </div>
       </div>
     )
@@ -60,4 +53,4 @@ class Users extends React.Component {
 }
 
 
-export default Users;
+export default Players;
