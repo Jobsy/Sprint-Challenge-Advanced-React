@@ -37,7 +37,7 @@ class App extends React.Component {
         </div> */}
 
         <div>
-          <Route exact path="/followers" render={(props) => <Players {...props} followersProps={this.state.followers} />} />
+          <Route exact path="/" render={(props) => <Players {...props} followersProps={this.state.followers} />} />
         </div>
       </div>
     );
