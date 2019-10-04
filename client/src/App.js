@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from "axios"
+import { Route } from 'react-router-dom';
+
+import Players from './components/Players';
+import Navbar from "./components/NavBar";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      players: []
+    };
+
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:5000/api/players").then(response => {
+      this.setState({ players: response.data });
+    });
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <Navbar />
+        <div>
+          <Route exact path="/" render={(props) => <Players {...props} playersProps={this.state.players} />} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
