@@ -10,14 +10,14 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      followers: []
+      players: []
     };
 
   }
 
   componentDidMount() {
     axios.get("http://localhost:5000/api/players").then(response => {
-      this.setState({ followers: response.data });
+      this.setState({ players: response.data });
     });
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
       <div className="app">
         <Navbar />
         <div>
-          <Route exact path="/" render={(props) => <Players {...props} followersProps={this.state.followers} />} />
+          <Route exact path="/" render={(props) => <Players {...props} playersProps={this.state.players} />} />
         </div>
       </div>
     );
