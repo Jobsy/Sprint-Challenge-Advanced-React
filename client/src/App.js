@@ -4,7 +4,7 @@ import { Link, Route } from 'react-router-dom';
 
 import Players from './components/Players';
 // import Followers from './components/Followers';
-// import Navbar from "./components/NavBar";
+import Navbar from "./components/NavBar";
 
 // import logo from './logo.svg';
 import './App.css';
@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-              {/* <Navbar /> */}
+              <Navbar />
 
         {/* <div>
           <Link exact to="/"><h1>GitHub User Card</h1></Link>
