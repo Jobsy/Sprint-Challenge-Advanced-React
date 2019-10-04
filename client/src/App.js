@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from "axios"
+import { Link, Route } from 'react-router-dom';
+
+import Users from './components/Users';
+import Followers from './components/Followers';
+import Navbar from "./components/NavBar";
+
+// import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      users: {},
+      followers: []
+    };
+
+  }
+
+  
+
+  render() {
+    return (
+      <div className="app">
+              <Navbar />
+
+        <div>
+          <Link exact to="/"><h1>GitHub User Card</h1></Link>
+          <Route exact path="/" render={(props) => <Users {...props} usersProps={this.state.users} />} />
+        </div>
+
+        <div>
+          <Route exact path="/followers" render={(props) => <Followers {...props} followersProps={this.state.followers} />} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
